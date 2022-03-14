@@ -24,6 +24,8 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    private String ensignUrl;
+
     @Transient
     private MultipartFile file;
 

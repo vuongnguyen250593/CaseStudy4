@@ -115,8 +115,8 @@
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <a class="gallery_img" href="${data.image}">
-                                            <img class="d-block w-100" src="${data.image}" alt="First slide">
+                                        <a class="gallery_img" th:href="${product.image}">
+                                            <img class="d-block w-100" th:src="${product.image}" alt="First slide">
                                         </a>
                                     </div>
                                 </div>
@@ -128,9 +128,9 @@
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">${data.price}</p>
+                                <p class="product-price" th:text="${product.price}"></p>
                                 <a href="shop-details.html">
-                                    <h6>${data.name}</h6>
+                                    <h6 th:text="${product.name}"></h6>
                                 </a>
                                 <!-- Ratings & Review -->
                                 <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
@@ -144,7 +144,7 @@
                                     </div>
                                 </div>
                                 <!-- Avaiable -->
-                                <p class="avaibility"><i class="fa fa-circle"></i> Tình trạng: Còn ${data.quantity} sản phẩm</p>
+                                <p class="avaibility"><i class="fa fa-circle"></i> Tình trạng: Còn <span th:text="${product.quantity}"></span> sản phẩm</p>
                             </div>
 
                             <div class="short_overview my-5">
@@ -153,7 +153,7 @@
 
                             <!-- Add to Cart Form -->
                             <!--                            <form class="cart clearfix" method="post" action="shop-cart.html">-->
-                            <a href="#" class="btn amado-btn" onclick="addToCart(${data.id}, '${data.name}', ${data.price})">Add to cart</a>
+                            <a href="#" class="btn amado-btn" onclick="addToCart()">Add to cart</a>
                             <!--                            </form>-->
                         </div>
                     </div>
