@@ -17,8 +17,8 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" th:href="@{/css/core-style.css}">
     <!--    <link rel="stylesheet" th:href="@{style.css}">-->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script th:src="@{/ajax/shop-detail.js}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script th:src="@{/ajax/shop-detail.js}"></script>
 </head>
 
 <body>
@@ -154,7 +154,10 @@
 
                         <!-- Add to Cart Form -->
                         <!--                            <form class="cart clearfix" method="post" action="shop-cart.html">-->
-                        <button class="btn amado-btn" th:attr="onclick=|addToCart(${product.id})|" >Add to cart</button>
+                        <button class="btn amado-btn"
+                                th:attr="onclick=|addToCart(${product.id},${product.name}, ${product.price})|">Add to
+                            cart
+                        </button>
                         <!--                            </form>-->
                     </div>
                 </div>

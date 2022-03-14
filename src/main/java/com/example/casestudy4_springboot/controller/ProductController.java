@@ -16,7 +16,7 @@ public class ProductController {
     @Autowired
     private IProductService productService;
 
-    @GetMapping("/hehe/{id}")
+    @GetMapping("/shop-detail/{id}")
     public ModelAndView showDetail(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView("shop-detail");
         Optional<Product> product = productService.findById(id);
