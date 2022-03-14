@@ -1,4 +1,4 @@
-function addToCart(id, name, price) {
+function addToCart(id) {
     event.preventDefault();
     let newCart = {
         "id": id,
@@ -6,6 +6,7 @@ function addToCart(id, name, price) {
         "quantity": 1,
         "price": price
     };
+    console.log(id)
 
     $.ajax({
         headers: {
@@ -78,7 +79,7 @@ function getProductDetail(data) {
     `;
 }
 
-viewProductDetail(1);
+
 
 function viewProductDetail(id) {
     $.ajax({

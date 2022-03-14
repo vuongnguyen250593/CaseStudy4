@@ -16,12 +16,12 @@ public class ProductController {
     @Autowired
     private IProductService productService;
 
-    @GetMapping("/shop-detail/{id}")
+    @GetMapping("/hehe/{id}")
     public ModelAndView showDetail(@PathVariable("id") long id) {
-        ModelAndView modelAndView = new ModelAndView("test");
+        ModelAndView modelAndView = new ModelAndView("shop-detail");
         Optional<Product> product = productService.findById(id);
         if (product.isPresent()) {
-            modelAndView.addObject("product", product);
+            modelAndView.addObject("product", product.get());
         } else {
             modelAndView.addObject("message", "Không có sản phẩm");
         }
