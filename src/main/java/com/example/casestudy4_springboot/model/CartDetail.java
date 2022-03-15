@@ -5,15 +5,17 @@ import java.util.Map;
 public class CartDetail {
     private Long id;
     private String name;
+    private String image;
     private int quantity;
     private double price;
 
     public CartDetail() {
     }
 
-    public CartDetail(Long id, String name, int quantity, double price) {
+    public CartDetail(Long id, String name, String image, int quantity, double price) {
         this.id = id;
         this.name = name;
+        this.image = image;
         this.quantity = quantity;
         this.price = price;
     }
@@ -43,6 +45,14 @@ public class CartDetail {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getQuantity() {

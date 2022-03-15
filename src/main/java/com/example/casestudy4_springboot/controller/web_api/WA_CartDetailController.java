@@ -36,4 +36,34 @@ public class WA_CartDetailController {
         return CartDetail.countCart(cart);
     }
 
+    @PutMapping("/api/cart")
+    public int updateCart(@RequestBody CartDetail cartDetail, HttpSession session) {
+        Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new HashMap<>();
+        }
+        long productId = cartDetail.getId();
+        if (cart.containsKey(productId)) {
+            CartDetail c = cart.get(productId);
+            c.setQuantity(cartDetail.getQuantity());
+        }
+        session.setAttribute("cart", cart);
+        return CartDetail.countCart(cart);
+    }
+
+    @DeleteMapping("/api/cart/{id}")
+    public int deleteCartItem(@PathVariable long id, HttpSession session) {
+        Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
+        if (cart != null && cart.containsKey(id)) {
+            cart.remove(id);
+            session.setAttribute("cart", cart);
+        }
+        return CartDetail.countCart(cart);
+    }
+
+    @GetMapping("/api/cart")
+    public int count(HttpSession session) {
+        Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
+        return CartDetail.countCart(cart);
+    }
 }

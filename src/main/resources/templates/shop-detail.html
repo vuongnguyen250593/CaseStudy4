@@ -71,7 +71,7 @@
         </div>
         <!-- Cart Menu -->
         <div class="cart-fav-search mb-100">
-            <a href="shop-cart.html" class="cart-nav"><img th:src="@{/img/core-img/cart.png}" alt=""> Cart (<span
+            <a th:href="@{/bill}" class="cart-nav"><img th:src="@{/img/core-img/cart.png}" alt=""> Cart (<span
                     id="cart-counter">0</span>)</a>
             <a href="user-favourite.html" class="fav-nav"><img th:src="@{/img/core-img/favorites.png}" alt=""> Favourite</a>
             <a href="#" class="search-nav"><img th:src="@{/img/core-img/search.png}" alt=""> Search</a>
@@ -129,7 +129,7 @@
                         <div class="product-meta-data">
                             <div class="line"></div>
                             <p class="product-price" th:text="${product.price}"></p>
-                            <a href="shop-details.html">
+                            <a>
                                 <h6 th:text="${product.name}"></h6>
                             </a>
                             <!-- Ratings & Review -->
@@ -156,7 +156,7 @@
                         <!-- Add to Cart Form -->
                         <!--                            <form class="cart clearfix" method="post" action="shop-cart.html">-->
                         <button class="btn amado-btn"
-                                th:attr="onclick=|addToCart(${product.id},${product.name}, ${product.price})|">Add to
+                                th:attr="onclick=|addToCart(${product.id},'${product.image}','${product.name}', ${product.price})|">Add to
                             cart
                         </button>
                         <!--                            </form>-->

@@ -13,6 +13,8 @@ public class BillDetail {
 
     private String product;
 
+    private String image;
+
     private int quantity;
 
     private double totalMoney;
@@ -24,9 +26,10 @@ public class BillDetail {
     public BillDetail() {
     }
 
-    public BillDetail(Long id, String product, int quantity, double totalMoney, Bill bill) {
+    public BillDetail(Long id, String product, String image, int quantity, double totalMoney, Bill bill) {
         this.id = id;
         this.product = product;
+        this.image = image;
         this.quantity = quantity;
         this.totalMoney = totalMoney;
         this.bill = bill;
@@ -46,6 +49,14 @@ public class BillDetail {
 
     public void setProduct(String product) {
         this.product = product;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getQuantity() {

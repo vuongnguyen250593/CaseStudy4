@@ -16,6 +16,8 @@ public class ProductController {
     @Autowired
     private IProductService productService;
 
+
+
     @GetMapping("/shop-detail/{id}")
     public ModelAndView showDetail(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView("shop-detail");
