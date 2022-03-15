@@ -1,9 +1,12 @@
 package com.example.casestudy4_springboot.service.implement;
 
+import com.example.casestudy4_springboot.model.Category;
 import com.example.casestudy4_springboot.model.Product;
 import com.example.casestudy4_springboot.repository.IProductRepository;
 import com.example.casestudy4_springboot.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,25 +15,51 @@ import java.util.Optional;
 public class ProductService implements IProductService {
 
     @Autowired
-    private IProductRepository productRepository;
+    private IProductRepository iProductRepository;
+
 
     @Override
     public Iterable<Product> findAll() {
-        return productRepository.findAll();
+        return iProductRepository.findAll();
     }
 
     @Override
     public Optional<Product> findById(long id) {
-        return productRepository.findById(id);
-    }
-
-    @Override
-    public Product save(Product product) {
-        return productRepository.save(product);
+        return iProductRepository.findById(id);
     }
 
     @Override
     public void deleteById(long id) {
-        productRepository.deleteById(id);
+        iProductRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Product> findAll(Pageable pageable) {
+        return iProductRepository.findAll(pageable);
+    }
+
+    @Override
+    public Optional<Product> findOne(Long id) {
+        return iProductRepository.findById(id);
+    }
+
+    @Override
+    public Product save(Product product) {
+        return iProductRepository.save(product);
+    }
+
+    @Override
+    public void delete(Long id) {
+        iProductRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Product> findAllByName(Pageable pageable, String name) {
+        return iProductRepository.findAllByNameContaining(pageable, name);
+    }
+
+    @Override
+    public Page<Product> findAllByCategory(Pageable pageable, Category category) {
+        return iProductRepository.findAllByCategory(pageable, category);
     }
 }

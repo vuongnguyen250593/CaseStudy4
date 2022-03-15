@@ -33,30 +33,34 @@
 <body>
     <div class="container mt-3">
         <h2>Update Product</h2>
-        <form action="" method="post">
+        <!--/*@thymesVar id="product" type=""*/-->
+        <!--/*@thymesVar id="getId" type=""*/-->
+        <form th:action="@{/admin/edit/{id}(id=${product.getId()})}" method="post" th:object="${product}">
           <div class="mb-3">
-            <label>Categery_ID:</label>
-            <input type="text" class="form-control" placeholder="Enter Email" name="category">
+            <label>Name:</label>
+            <input type="text" th:field="*{name}" class="form-control" placeholder="Enter Name" name="name">
           </div>
           <div class="mb-3">
-            <label>Title:</label>
-            <input type="text" class="form-control" placeholder="Enter Title" name="title">
+            <label>Quantity:</label>
+            <input type="text" th:field="*{quantity}" class="form-control" placeholder="Enter Quantity" name="quantity">
           </div>
           <div class="mb-3">
             <label>Price:</label>
-            <input type="text" class="form-control" placeholder="Enter Price" name="price">
-          </div>
-          <div class="mb-3">
-            <label>Discount:</label>
-            <input type="text" class="form-control" placeholder="Enter Discount" name="discount">
-          </div>
-          <div class="mb-3">
-            <label>Thumbnail:</label>
-            <input type="text" class="form-control" placeholder="Enter Thumbnail" name="thumbnail">
+            <input type="text" th:field="*{price}" class="form-control" placeholder="Enter Price" name="price">
           </div>
           <div class="mb-3">
             <label>Description:</label>
-            <input type="text" class="form-control" placeholder="Enter Description" name="description">
+            <input type="text" th:field="*{description}" class="form-control" placeholder="Enter description" name="description">
+          </div>
+          <div class="mb-3">
+            <label>Image:</label>
+            <input type="file" th:field="*{file}" class="form-control" placeholder="Enter image" name="image">
+          </div>
+          <div class="mb-3">
+              <label>Category:</label>
+              <select th:field="*{category}">
+                  <option th:each="c : ${categories}" th:value="${c.getId()}" th:text="${c.getName()}"></option>
+              </select>
           </div>
           <button type="submit" class="btn btn-light">Update</button>
         </form>

@@ -24,6 +24,8 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    private String ensignUrl;
+
     @Transient
     private MultipartFile file;
 
@@ -95,5 +97,21 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getEnsignUrl() {
+        return ensignUrl;
+    }
+
+    public void setEnsignUrl(String ensignUrl) {
+        this.ensignUrl = ensignUrl;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 }

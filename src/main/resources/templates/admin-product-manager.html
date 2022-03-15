@@ -9,8 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <style>
-        .container-fluid {
-        }
+
 
         table {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -65,28 +64,28 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Categery_ID</th>
               <th>Name</th>
+              <th>Quantity</th>
               <th>Price</th>
-              <th>Discount</th>
-              <th>Thumbnail</th>
               <th>Description</th>
+              <th>Image</th>
+              <th>Category</th>
               <th colspan="2">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr th:each="p : ${products}">
-              <td th:text="p.getId()"></td>
-              <td><a th:text="${p.getCategory().getName()}"
-                     th:href="@{/category/{id}(id=${p.getCategory().getId()})}"></a></td>
-              <td th:text="p.getName()"></td>
-              <td th:text="p.getPrice()"></td>
-              <td th:text="p.Discount()"></td>
-              <td th:text="p.getThumbnail()"></td>
-              <td th:text="p.getDescription()"></td>
+              <td th:text="${p.getId()}"></td>
+              <td th:text="${p.getName()}"></td>
+              <td th:text="${p.getQuantity()}"></td>
+              <td th:text="${p.getPrice()}"></td>
+              <td th:text="${p.getDescription()}"></td>
+              <td><img th:src="@{${p.getImage()}}" alt="Lỗi" th:width="50" th:height="50"></td>
+              <td th:text="${p.getCategory().getName()}"
+                  th:href="@{/category/{id}(id=${p.getCategory().getId()})}"></td>
               <td><a th:href="@{/admin/edit/{id}(id=${p.getId()})}">Update</a></td>
               <td><a th:href="@{/admin/delete/{id}(id=${p.getId()})}"
-                     onclick="return confirm('Are you sure you want to delete this city?')">Delete</a></td>
+                     onclick="return confirm('Are you sure you want to delete this product?')">Delete</a></td>
             </tr>
           </tbody>
         </table>

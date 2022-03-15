@@ -28,30 +28,33 @@
 <body>
     <div class="container mt-3">
         <h2>Create New Product</h2>
-        <form action="" method="post">
+        <form th:action="@{/admin/create}" method="post" th:object="${product}" enctype="multipart/form-data">
           <div class="mb-3">
-            <label>Categery_ID:</label>
-            <input type="text" class="form-control" placeholder="Enter Email" name="category">
+              <label>Name:</label>
+              <input type="text" th:field="*{name}" class="form-control" placeholder="Enter Email" name="name">
           </div>
           <div class="mb-3">
-            <label>Title:</label>
-            <input type="text" class="form-control" placeholder="Enter Title" name="title">
+              <label>Quantity:</label>
+              <input type="text" th:field="*{quantity}" class="form-control" placeholder="Enter Title" name="quantity">
           </div>
           <div class="mb-3">
-            <label>Price:</label>
-            <input type="text" class="form-control" placeholder="Enter Price" name="price">
+              <label>Price:</label>
+              <input type="text" th:field="*{price}" class="form-control" placeholder="Enter Price" name="price">
           </div>
           <div class="mb-3">
-            <label>Discount:</label>
-            <input type="text" class="form-control" placeholder="Enter Discount" name="discount">
+              <label>Description:</label>
+              <input type="text" th:field="*{description}" class="form-control" placeholder="Enter Discount" name="description">
+              <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
           </div>
           <div class="mb-3">
-            <label>Thumbnail:</label>
-            <input type="text" class="form-control" placeholder="Enter Thumbnail" name="thumbnail">
+              <label>Image:</label>
+              <input type="file" th:field="*{file}" class="form-control" placeholder="Enter Image" name="image">
           </div>
           <div class="mb-3">
-            <label>Description:</label>
-            <input type="text" class="form-control" placeholder="Enter Description" name="description">
+              <label>Category:</label>
+              <select th:field="*{category}">
+                  <option th:each="c : ${categories}" th:value="${c.getId()}" th:text="${c.getName()}"></option>
+              </select>
           </div>
           <button type="submit" class="btn btn-secondary">Create</button>
         </form>
