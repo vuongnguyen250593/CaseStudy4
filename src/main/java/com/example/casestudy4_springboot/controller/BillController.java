@@ -18,13 +18,6 @@ import java.util.Map;
 public class BillController {
 
 
-//    @ModelAttribute
-//    public void commonAttrs(Model model, HttpSession session) {
-//        model.addAttribute("cart-counter", CartDetail.countCart((Map<Long, CartDetail>) session.getAttribute("cart")));
-//    }
-
-
-
     @GetMapping("/bill")
     public ModelAndView showBill(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("shop-cart");
@@ -34,6 +27,7 @@ public class BillController {
         } else {
             modelAndView.addObject("carts", cart.values());
         }
+        modelAndView.addObject("cartStats", CartDetail.cartStats(cart));
         return modelAndView;
     }
 

@@ -37,7 +37,7 @@ public class WA_CartDetailController {
     }
 
     @PutMapping("/api/cart")
-    public int updateCart(@RequestBody CartDetail cartDetail, HttpSession session) {
+    public ResponseEntity<Map<String, String>> updateCart(@RequestBody CartDetail cartDetail, HttpSession session) {
         Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
         if (cart == null) {
             cart = new HashMap<>();
@@ -48,17 +48,17 @@ public class WA_CartDetailController {
             c.setQuantity(cartDetail.getQuantity());
         }
         session.setAttribute("cart", cart);
-        return CartDetail.countCart(cart);
+        return new ResponseEntity<>(CartDetail.cartStats(cart), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/cart/{id}")
-    public int deleteCartItem(@PathVariable long id, HttpSession session) {
+    public ResponseEntity<Map<String, String>> deleteCartItem(@PathVariable long id, HttpSession session) {
         Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
         if (cart != null && cart.containsKey(id)) {
             cart.remove(id);
             session.setAttribute("cart", cart);
         }
-        return CartDetail.countCart(cart);
+        return new ResponseEntity<>(CartDetail.cartStats(cart), HttpStatus.OK);
     }
 
     @GetMapping("/api/cart")

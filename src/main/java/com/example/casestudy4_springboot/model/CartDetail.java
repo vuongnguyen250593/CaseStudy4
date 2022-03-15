@@ -1,5 +1,6 @@
 package com.example.casestudy4_springboot.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CartDetail {
@@ -29,6 +30,33 @@ public class CartDetail {
             }
         }
         return count;
+    }
+
+    public static double sumAmount(Map<Long, CartDetail> cart) {
+        double sum = 0L;
+        if (cart != null) {
+            for (CartDetail c :
+                    cart.values()) {
+                sum += c.getQuantity() * c.getPrice();
+            }
+        }
+        return sum;
+    }
+
+    public static Map<String, String> cartStats(Map<Long, CartDetail> cart) {
+        double sum = 0L;
+        int count = 0;
+        if (cart != null) {
+            for (CartDetail c :
+                    cart.values()) {
+                sum += c.getQuantity() * c.getPrice();
+                count += c.getQuantity();
+            }
+        }
+        Map<String, String> result = new HashMap<>();
+        result.put("counter", String.valueOf(count));
+        result.put("amount", String.valueOf(sum));
+        return result;
     }
 
     public Long getId() {

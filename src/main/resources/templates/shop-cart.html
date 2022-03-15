@@ -146,10 +146,9 @@
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                                <li><span>Tổng tiền:</span> <span>$140.00</span></li>
-                                <li><span>Giảm giá:</span> <span>Free</span></li>
-                                <li><span>Vận chuyển:</span> <span>Free</span></li>
-                                <li><span>Tiền lưu vào db:</span> <span>$140.00</span></li>
+                                <li><span>Tổng đơn hàng:</span> <span id="amount-cart1" th:text="${cartStats.amount}"></span></li>
+                                <li><span>Giảm giá:</span> <span id="amount-cart2" th:text="${cartStats.amount} * 0.01"></span></li>
+                                <li><span>Tiền phải thanh toán:</span> <span id="amount-cart3" th:text="${cartStats.amount} * 0.99"></span></li>
                             </ul>
                             <h5>Hình thức thanh toán</h5>
                             <div class="summary-table">
