@@ -3,6 +3,7 @@ package com.example.casestudy4_springboot.controller.web_api;
 import com.example.casestudy4_springboot.model.Cart;
 import com.example.casestudy4_springboot.model.CartDetail;
 import com.example.casestudy4_springboot.model.Product;
+import com.example.casestudy4_springboot.service.IBillService;
 import com.example.casestudy4_springboot.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,9 @@ import java.util.Optional;
 @CrossOrigin("*")
 @SessionAttributes("cart")
 public class WA_CartDetailController {
+
+//    @Autowired
+//    private IBillService billService;
 
     @PostMapping("/api/cart")
     public int addToCart(@RequestBody CartDetail cartDetail, HttpSession session) {
@@ -66,4 +70,12 @@ public class WA_CartDetailController {
         Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
         return CartDetail.countCart(cart);
     }
+
+//    @PostMapping("/api/pay")
+//    public HttpStatus pay(HttpSession session) {
+//        if (billService.addBill((Map<Long, CartDetail>) session.getAttribute("cart"))) {
+//            return HttpStatus.OK;
+//        }
+//        return HttpStatus.BAD_REQUEST;
+//    }
 }

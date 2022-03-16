@@ -1,6 +1,8 @@
 package com.example.casestudy4_springboot.controller;
 
+import com.example.casestudy4_springboot.model.Comment;
 import com.example.casestudy4_springboot.model.Product;
+import com.example.casestudy4_springboot.service.ICommentService;
 import com.example.casestudy4_springboot.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +17,6 @@ public class ProductController {
 
     @Autowired
     private IProductService productService;
-
-
 
     @GetMapping("/shop-detail/{id}")
     public ModelAndView showDetail(@PathVariable("id") long id) {

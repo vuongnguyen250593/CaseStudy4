@@ -1,4 +1,7 @@
 package com.example.casestudy4_springboot.service;
 
-public interface ICommentService {
+import com.example.casestudy4_springboot.model.Comment;
+
+public interface ICommentService extends IGeneralService<Comment>{
+    Iterable<Comment> findCommentsByProduct(long id);
 }

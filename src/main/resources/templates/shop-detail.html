@@ -19,6 +19,7 @@
     <!--    <link rel="stylesheet" th:href="@{style.css}">-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script th:src="@{/ajax/shop-detail.js}"></script>
+    <script th:src="@{/static/ajax/comment.js}"></script>
 </head>
 
 <body>
@@ -73,7 +74,7 @@
         <div class="cart-fav-search mb-100">
             <a th:href="@{/bill}" class="cart-nav"><img th:src="@{/img/core-img/cart.png}" alt=""> Cart (<span
                     id="cart-counter">0</span>)</a>
-            <a href="user-favourite.html" class="fav-nav"><img th:src="@{/img/core-img/favorites.png}" alt=""> Favourite</a>
+            <a th:href="@{user-favourite.html}" class="fav-nav"><img th:src="@{/img/core-img/favorites.png}" alt=""> Favourite</a>
             <a href="#" class="search-nav"><img th:src="@{/img/core-img/search.png}" alt=""> Search</a>
         </div>
         <!-- Social Button -->
@@ -141,7 +142,8 @@
                                 </div>
                                 <div class="cart">
                                     <a href="#" data-toggle="tooltip" data-placement="left" title="Comment"><img
-                                            th:src="@{/img/core-img/cmt.png}" alt=""></a>
+                                            th:src="@{/img/core-img/cmt.png}" alt=""
+                                            th:attr="onclick=|displayFormComment(${product.id})|"></a>
                                 </div>
                             </div>
                             <!-- Avaiable -->
@@ -156,10 +158,35 @@
                         <!-- Add to Cart Form -->
                         <!--                            <form class="cart clearfix" method="post" action="shop-cart.html">-->
                         <button class="btn amado-btn"
-                                th:attr="onclick=|addToCart(${product.id},'${product.image}','${product.name}', ${product.price})|">Add to
+                                th:attr="onclick=|addToCart(${product.id},'${product.image}','${product.name}', ${product.price})|">
+                            Add to
                             cart
                         </button>
                         <!--                            </form>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="comment" hidden>
+                <div class="col-12 col-lg-8">
+                    <div class="checkout_details_area mt-50 clearfix">
+                        <div class="cart-title">
+                            <h2>Comment</h2>
+                        </div>
+
+                        <div class="row">
+                            <form>
+                                <div class="col-12 mb-3">
+                                    <input type="text" class="form-control" id="company" placeholder="Content"
+                                           size="60">
+                                    <button type="submit" class="btn amado-btn" id="btn-comment" data-bs-dismiss="modal">
+                                        Bình luận</button>
+                                </div>
+                            </form>
+
+                            <hr>
+                            <div class="col-3 mb-3" id="cus-comment">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

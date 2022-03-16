@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,6 +26,9 @@ public class Product {
     private Category category;
 
     private String ensignUrl;
+
+    @OneToMany(mappedBy = "product")
+    private List<Comment> comments;
 
     @Transient
     private MultipartFile file;

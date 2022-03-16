@@ -33,7 +33,6 @@ public class Bill {
 
     private double total;
 
-
     public Bill() {
     }
 
