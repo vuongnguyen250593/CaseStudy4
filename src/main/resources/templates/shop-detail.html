@@ -19,7 +19,7 @@
     <!--    <link rel="stylesheet" th:href="@{style.css}">-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script th:src="@{/ajax/shop-detail.js}"></script>
-    <script th:src="@{/static/ajax/comment.js}"></script>
+    <script th:src="@{/ajax/comment.js}"></script>
 </head>
 
 <body>
@@ -141,7 +141,7 @@
                                             th:src="@{/img/core-img/tim.png}" alt=""></a>
                                 </div>
                                 <div class="cart">
-                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Comment"><img
+                                    <a href="#comment" data-toggle="tooltip" data-placement="left" title="Comment"><img
                                             th:src="@{/img/core-img/cmt.png}" alt=""
                                             th:attr="onclick=|displayFormComment(${product.id})|"></a>
                                 </div>
@@ -175,16 +175,16 @@
 
                         <div class="row">
                             <form>
-                                <div class="col-12 mb-3">
+                                <div class="col-12 mb-3" style="display: flex">
                                     <input type="text" class="form-control" id="company" placeholder="Content"
-                                           size="60">
+                                           size="50" style="margin-right: 10px">
                                     <button type="submit" class="btn amado-btn" id="btn-comment" data-bs-dismiss="modal">
                                         Bình luận</button>
                                 </div>
                             </form>
 
                             <hr>
-                            <div class="col-3 mb-3" id="cus-comment">
+                            <div class="col-12 mb-3" id="cus-comment">
                             </div>
                         </div>
                     </div>

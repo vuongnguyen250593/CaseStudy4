@@ -107,11 +107,12 @@ function getListComment(id) {
 }
 
 function displayFormComment(id) {
+    getListComment(id);
     document.getElementById("comment").hidden = false;
     document.getElementById("btn-comment").onclick = function () {
         createComment(id);
-        getListComment(id);
     }
+    document.getElementById("company").reset();
 }
 
 function createComment(productId) {

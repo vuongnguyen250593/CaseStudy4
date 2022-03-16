@@ -28,13 +28,4 @@ public class WA_CommentController {
         Comment commentCreate = commentService.save(comment);
         return new ResponseEntity<>(commentCreate, HttpStatus.OK);
     }
-
-//    @GetMapping("/comment/{id}")
-//    public ResponseEntity<Optional<Comment>> findByProduct(@PathVariable long id) {
-//        Optional<Comment> comments = commentService.findById(id);
-//        if (!comments.isPresent()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<>(comments, HttpStatus.OK);
-//    }
 }
