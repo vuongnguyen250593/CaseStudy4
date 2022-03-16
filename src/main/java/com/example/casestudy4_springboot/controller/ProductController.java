@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -39,7 +42,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public ModelAndView showProduct(Pageable pageable, @RequestParam Optional<String> search) {
+    public ModelAndView showProduct(@PageableDefault(value = 10) Pageable pageable, @RequestParam Optional<String> search) {
         ModelAndView modelAndView = new ModelAndView("admin-product-manager");
         Page<Product> products;
         if (search.isPresent()) {
@@ -53,7 +56,7 @@ public class ProductController {
     }
 
     @GetMapping("/delete/{id}")
-    public ModelAndView delete(Pageable pageable, @PathVariable("id") Long id) {
+    public ModelAndView delete(@PageableDefault(value = 10) Pageable pageable, @PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("admin-product-manager");
         iProductService.delete(id);
         Page<Product> products = iProductService.findAll(pageable);
@@ -102,14 +105,25 @@ public class ProductController {
                               @PathVariable("id") Long id) throws IOException {
         if (bindingResult.hasFieldErrors()) {
             model.addAttribute("product", product);
-            return "admin/edit";
+            return "redirect:/admin/edit";
         }
         MultipartFile multipartFile = product.getFile();
         String fileName = multipartFile.getOriginalFilename();
-        FileCopyUtils.copy(product.getFile().getBytes(), new File(fileUpload + fileName));
+        try {
+            FileCopyUtils.copy(product.getFile().getBytes(), new File(fileUpload + fileName));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
         product.setId(id);
-        iProductService.save(product);
+
+        if(!fileName.equals("")) {
+            product.setImage("/imageUpload/" + fileName);
+            iProductService.save(product);
+        } else {
+            product.setImage(iProductService.findOne(id).get().getImage());
+            iProductService.save(product);
+        }
         return "redirect:/admin";
     }
 }

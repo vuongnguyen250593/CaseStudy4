@@ -2,6 +2,7 @@ package com.example.casestudy4_springboot.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -10,11 +11,19 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
     @NotNull(message = "Name is not empty")
     private String name;
 
+//    @OneToMany(mappedBy = "category")
+//    private List<Product> products;
+
+
     public Category() {
     }
+
+
 
     public Category(Long id, String name) {
         this.id = id;
