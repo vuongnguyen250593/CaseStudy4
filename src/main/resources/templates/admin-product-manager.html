@@ -51,7 +51,7 @@
           <div>
             <form th:action="@{/admin}" method="get">
               <div class="input-group mb-3" id="search-box">
-                <input type="text" class="form-control" placeholder="Search" th:value="${search}">
+                <input type="text" class="form-control" placeholder="Search" th:value="${search}" name="search">
                 <button class="btn btn-dark" type="submit">Search</button>
               </div>
             </form>
@@ -59,9 +59,24 @@
           <div id="create-button">
                 <a th:href="@{/admin/create}"><button class="btn btn-dark">+ Create New Product</button></a>
           </div>
-        </div>          
+        </div>
+
         <table class="table table-borderless">
           <thead>
+            <tr>
+                <td><a th:href="@{/admin/desc}">Less Price</a></td>
+                <td><a th:href="@{/admin/asc}">Greater Price</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <select>
+                        <option>Category</option>
+                        <option th:each="c : ${categories}" th:text="${c.getName()}"></option>
+                    </select>
+                </td>
+            </tr>
             <tr>
               <th>ID</th>
               <th>Name</th>
@@ -90,7 +105,8 @@
           </tbody>
         </table>
       </div>
-      <div>
+
+      <div class="container">
         <a th:href="@{/admin(page=${products.number - 1},search=${search})}"
            th:if="${products.hasPrevious()}"><span>Previous</span></a>
         <span th:text="${products.number + 1} + '/' + ${products.totalPages}"></span>
@@ -98,7 +114,7 @@
            th:if="${products.hasNext()}"><span>Next</span></a>
       </div>
       <div class="container" id="back-to-home">
-        <a href="index.html">Back to home -></a>
+        <a th:href="index.html">Back to home -></a>
       </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
