@@ -76,10 +76,10 @@ public class ShopController {
         return modelAndView;
     }
 
-    @GetMapping("/findPrice")
-    public ModelAndView findByPrice(@PathVariable("min") double min, @PathVariable("max") double max ) {
+    @GetMapping("/findPrice/{min}/{max}")
+    public ModelAndView findByPrice(@PathVariable("min") double min, @PathVariable("max") double max, Pageable pageable ) {
         ModelAndView modelAndView = new ModelAndView("shop");
-        Page<Product> products = iProductService.findAllByPriceBetween(min,max);
+        Page<Product> products = iProductService.findAllByPriceBetween(min,max, pageable);
         modelAndView.addObject("product2s", products);
         return modelAndView;
     }

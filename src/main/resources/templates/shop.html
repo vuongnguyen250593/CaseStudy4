@@ -18,7 +18,7 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" th:href="@{/css/core-style.css}">
-<!--    <link rel="stylesheet" th:href="@{/style.css}">-->
+    <!--    <link rel="stylesheet" th:href="@{/style.css}">-->
 
 </head>
 
@@ -107,24 +107,11 @@
             <div class="widget price mb-50">
                 <!-- Widget Title -->
                 Search theo giá
-                <h6 class="widget-title mb-30">Price</h6>
-
-                <div class="widget-desc">
-                    <div class="slider-range">
-                        <div data-min="10" data-max="1000" data-unit="$"
-                             class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                             data-value-min="10" data-value-max="1000" data-label-result="">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                        </div>
-                        <div class="range-price">$10 - $1000</div>
-                    </div>
-                </div>
+                <a th:href="@{/shop/findPrice/50/100}">50$-100$</a> <br>
+                <a th:href="@{/shop/findPrice/101/300}">100$-300$</a> <br>
+                <a th:href="@{/shop/findPrice/301/500}">300$-500$</a> <br>
                 <br>
-                <div class="slider-range">
                     <button class="btn amado-btn mb-10">Search</button>
-                </div>
             </div>
         </form>
     </div>
@@ -203,17 +190,6 @@
                         <a th:href="@{/shop/showDisplay(page=${product2s.number + 1},search=${search})}"
                            th:if="${product2s.hasNext()}"><span>Next</span></a>
                     </div>
-
-<!--                    đoạn này là phân trang mặc định của template nhưng chưa xử lý được, dùng cái phân trang theo bài a quân-->
-                    <!-- Pagination -->
-<!--                    <nav aria-label="navigation">-->
-<!--                        <ul class="pagination justify-content-end mt-50">-->
-<!--                            <li class="page-item active"><a class="page-link" href="#">01.</a></li>-->
-<!--                            <li class="page-item"><a class="page-link" href="#">02.</a></li>-->
-<!--                            <li class="page-item"><a class="page-link" href="#">03.</a></li>-->
-<!--                            <li class="page-item"><a class="page-link" href="#">04.</a></li>-->
-<!--                        </ul>-->
-<!--                    </nav>-->
                 </div>
             </div>
         </div>

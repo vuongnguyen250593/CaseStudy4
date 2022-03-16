@@ -20,5 +20,5 @@ public interface IProductService extends IGeneralService<Product> {
 
     Page<Product> findAllByCategory(long id, Pageable pageable);
 
-    Page<Product> findAllByPriceBetween(double min, double max);
+    Page<Product> findAllByPriceBetween(double min, double max, Pageable pageable);
 }

@@ -15,7 +15,7 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
 
     Page<Product> findProductsByCategory_Id (Long id, Pageable pageable);
 
-    Page<Product> findAllByPriceBetween(double min, double max);
+    Page<Product> findAllByPriceBetween(double min, double max, Pageable pageable);
 
 
 }

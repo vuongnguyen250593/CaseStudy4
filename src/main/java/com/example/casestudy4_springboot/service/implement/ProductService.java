@@ -64,7 +64,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Page<Product> findAllByPriceBetween(double min, double max) {
-        return iProductRepository.findAllByPriceBetween(min,max);
+    public Page<Product> findAllByPriceBetween(double min, double max, Pageable pageable) {
+        return iProductRepository.findAllByPriceBetween(min,max, pageable);
     }
 }
