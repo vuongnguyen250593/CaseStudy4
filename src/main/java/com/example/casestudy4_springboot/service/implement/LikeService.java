@@ -16,26 +16,26 @@ public class LikeService implements ILikeService {
 
     @Override
     public Iterable<Like> findAll() {
-        return null;
+        return likeRepository.findAll();
     }
 
     @Override
     public Optional<Like> findById(long id) {
-        return Optional.empty();
+        return likeRepository.findById(id);
     }
 
     @Override
     public Like save(Like like) {
-        return null;
+        return likeRepository.save(like);
     }
 
     @Override
     public void deleteById(long id) {
-
+        likeRepository.deleteById(id);
     }
 
     @Override
     public Iterable<Like> findLikeByUser(long id) {
-        return null;
+        return likeRepository.findLikesByUser_Id(id);
     }
 }

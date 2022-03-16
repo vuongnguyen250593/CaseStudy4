@@ -112,7 +112,6 @@ function displayFormComment(id) {
     document.getElementById("btn-comment").onclick = function () {
         createComment(id);
     }
-    document.getElementById("company").reset();
 }
 
 function createComment(productId) {
@@ -136,6 +135,7 @@ function createComment(productId) {
         url: `http://localhost:8080/api/add-comment`,
         success: function () {
             getListComment(productId);
+            document.getElementById("form-comment").reset();
         }
     });
     event.preventDefault();

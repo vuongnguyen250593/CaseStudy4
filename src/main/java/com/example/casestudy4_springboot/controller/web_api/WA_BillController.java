@@ -34,6 +34,4 @@ public class WA_BillController {
         }
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
-
-
 }

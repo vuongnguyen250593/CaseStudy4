@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ICommentRepository extends JpaRepository<Comment, Long> {
+
+    @Query("SELECT c FROM Comment c WHERE c.product.id = :id ORDER BY c.id DESC")
     Iterable<Comment> findCommentsByProduct_Id(long id);
 }
