@@ -95,7 +95,7 @@ function createBill() {
     let userId = 2;
     let date = new Date();
     let note = $('#note').val();
-    let statusBill = $('#status').val();
+    let statusBill = 1;
     let newBill = {
         user: {
             id:userId

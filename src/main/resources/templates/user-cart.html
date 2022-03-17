@@ -15,6 +15,9 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" th:href="@{/css/core-style.css}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script th:src="@{/ajax/user-bill.js}"></script>
+
 </head>
 
 <body>
@@ -99,28 +102,28 @@
                         <table class="table table-responsive">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th>Id</th>
                                 <th>Date</th>
                                 <th>Total Price</th>
-                                <th>Status</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody th:if="${bills} == null">
                             <p>Chưa có đơn hàng nào</p>
                             </tbody>
-                            <tbody th:if="${bills} != null" th:each="b, bState : ${bills}">
-                            <tr th:attr="id=|bill${b.id}|">
+                            <tbody th:if="${bills} != null" th:each="b : ${bills}">
+                            <tr>
                                 <td>
-                                    <span th:text="${b.id}"></span>
+                                    <p th:text="${b.id}"></p>
                                 </td>
                                 <td>
-                                    <span th:text="${b.date}"></span>
+                                    <p th:text="${b.date}"></p>
                                 </td>
                                 <td>
-                                    <span th:text="${b.total}"></span>
+                                    <p th:text="${b.total}"></p>
                                 </td>
                                 <td>
-                                    <span th:text="${b.status.s_id}"></span>
+                                    <a th:href="@{/user/bill-detail/{id}(id=${b.id})}">View</a>
                                 </td>
                             </tr>
                             </tbody>

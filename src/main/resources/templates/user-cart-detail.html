@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -13,12 +11,13 @@
     <title>NOW - OR NEVER | Cart</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="../static/img/core-img/brand-icon1.png">
+    <link rel="icon" th:href="@{/img/core-img/brand-icon1.png}">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="../static/css/core-style.css">
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" th:href="@{/css/core-style.css}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script th:src="@{/ajax/shop-detail.js}"></script>
+    <script th:src="@{/ajax/bill.js}"></script>
 </head>
 
 <body>
@@ -33,7 +32,7 @@
                 <div class="search-content">
                     <form action="#" method="get">
                         <input type="search" name="search" id="search" placeholder="Type your keyword...">
-                        <button type="submit"><img src="../static/img/core-img/search.png" alt=""></button>
+                        <button type="submit"><img th:src="@{/img/core-img/search.png}" alt=""></button>
                     </form>
                 </div>
             </div>
@@ -42,20 +41,13 @@
 </div>
 <!-- Search Wrapper Area End -->
 
+<div id="view-product-detail" hidden>
+
+</div>
+
 <!-- ##### Main Content Wrapper Start ##### -->
 <div class="main-content-wrapper d-flex clearfix">
 
-    <!-- Mobile Nav (max width 767px)-->
-    <div class="mobile-nav">
-        <!-- Navbar Brand -->
-        <div class="amado-navbar-brand">
-            <a href="shop-home.html"><img src="../static/img/core-img/logo.png" alt=""></a>
-        </div>
-        <!-- Navbar Toggler -->
-        <div class="amado-navbar-toggler">
-            <span></span><span></span><span></span>
-        </div>
-    </div>
 
     <!-- Header Area Start -->
     <header class="header-area clearfix">
@@ -65,16 +57,15 @@
         </div>
         <!-- Logo -->
         <div class="logo">
-            <a href="shop-home.html"><img src="../static/img/core-img/brand-icon1.png" width="150px" height="150px" alt=""></a>
+            <a href="shop-home.html"><img th:src="@{/img/core-img/brand-icon1.png}" width="150px" height="150px" alt=""></a>
         </div>
         <!-- Amado Nav -->
         <nav class="amado-nav">
             <ul>
                 <li><a href="shop-home.html">Home</a></li>
                 <li><a href="shop.html">Shop</a></li>
-                <li><a href="shop-details.html">Product</a></li>
-                <li class="active"><a href="shop-cart.html">Cart</a></li>
-                <li><a href="shop-checkout.html">Checkout</a></li>
+                <li><a href="user-edit-account.html">Account</a></li>
+                <li class="active"><a href="user-cart.html">Cart History</a></li>
             </ul>
         </nav>
         <!-- Button Group -->
@@ -84,9 +75,10 @@
         </div>
         <!-- Cart Menu -->
         <div class="cart-fav-search mb-100">
-            <a href="shop-cart.html" class="cart-nav"><img src="../static/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-            <a href="user-favourite.html" class="fav-nav"><img src="../static/img/core-img/favorites.png" alt=""> Favourite</a>
-            <a href="#" class="search-nav"><img src="../static/img/core-img/search.png" alt=""> Search</a>
+            <a th:href="@{/bill}" class="cart-nav"><img th:src="@{/img/core-img/cart.png}" alt=""> Cart (<span
+                    id="cart-counter">0</span>)</a>
+            <a href="user-favourite.html" class="fav-nav"><img th:src="@{/img/core-img/favorites.png}" alt=""> Favourite</a>
+            <a href="#" class="search-nav"><img th:src="@{/img/core-img/search.png}" alt=""> Search</a>
         </div>
         <!-- Social Button -->
         <div class="social-info d-flex justify-content-between">
@@ -103,7 +95,7 @@
             <div class="row">
                 <div class="col-12 col-lg-8">
                     <div class="cart-title mt-50">
-                        <h2>Cart Detail</h2>
+                        <h2>Shopping Cart</h2>
                     </div>
 
                     <div class="cart-table clearfix">
@@ -116,19 +108,19 @@
                                 <th>Quantity</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody th:if="${billDetail} != null" th:each="b : ${billDetail}">
                             <tr>
                                 <td class="cart_product_img">
-                                    <a href="#"><img src="../static/img/bg-img/cart1.jpg" alt="Product"></a>
+                                    <img th:src="${b.getImage()}" alt="Product">
                                 </td>
-                                <td class="cart_product_desc">
-                                    <h5>White Modern Chair</h5>
+                                <td>
+                                    <p th:text="${b.getProduct()}"></p>
                                 </td>
-                                <td class="price">
-                                    <span>$130</span>
+                                <td>
+                                    <p th:text="${b.getTotalMoney()}"></p>
                                 </td>
-                                <td class="qty">
-                                    <span>1</span>
+                                <td>
+                                    <p th:text="${b.getQuantity()}"></p>
                                 </td>
                             </tr>
                             </tbody>
@@ -136,15 +128,14 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <form action="">
+                    <form>
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
-                            <ul class="summary-table">
-                                <li><span>Tổng tiền:</span> <span>$140.00</span></li>
-                                <li><span>Giảm giá:</span> <span>Free</span></li>
-                                <li><span>Vận chuyển:</span> <span>Free</span></li>
-                                <li><span>Tiền lưu vào db:</span> <span>$140.00</span></li>
-                            </ul>
+<!--                            <ul class="summary-table">-->
+<!--                                <li><span>Tổng đơn hàng:</span> <span id="amount-cart1" th:text="${cartStats.amount}"></span></li>-->
+<!--                                <li><span>Giảm giá:</span> <span id="amount-cart2" th:text="${cartStats.amount} * 0.01"></span></li>-->
+<!--                                <li><span>Tiền phải thanh toán:</span> <span id="amount-cart3" th:text="${cartStats.amount} * 0.99"></span></li>-->
+<!--                            </ul>-->
                         </div>
                     </form>
 
@@ -190,7 +181,8 @@
                 <div class="single_widget_area">
                     <!-- Logo -->
                     <div class="footer-logo mr-50">
-                        <a href="shop-home.html"><img src="../static/img/core-img/brand-icon2.png" width="150px" height="150px"
+                        <a href="shop-home.html"><img th:src="@{/img/core-img/brand-icon2.png}" width="150px"
+                                                      height="150px"
                                                       alt=""></a>
                     </div>
                     <!-- Copywrite Text -->
@@ -247,15 +239,15 @@
 <!-- ##### Footer Area End ##### -->
 
 <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
-<script src="../static/js/jquery/jquery-2.2.4.min.js"></script>
+<script th:src="@{/js/jquery/jquery-2.2.4.min.js}"></script>
 <!-- Popper js -->
-<script src="../static/js/popper.min.js"></script>
+<script th:src="@{/js/popper.min.js}"></script>
 <!-- Bootstrap js -->
-<script src="../static/js/bootstrap.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
 <!-- Plugins js -->
-<script src="../static/js/plugins.js"></script>
+<script th:src="@{/js/plugins.js}"></script>
 <!-- Active js -->
-<script src="../static/js/active.js"></script>
+<script th:src="@{/js/active.js}"></script>
 
 </body>
 

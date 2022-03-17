@@ -4,4 +4,5 @@ import com.example.casestudy4_springboot.model.BillDetail;
 
 public interface IBill_detailService {
     void save(BillDetail billDetail);
+    Iterable<BillDetail> findBillDetailByBillId(long id);
 }

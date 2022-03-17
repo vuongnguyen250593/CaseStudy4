@@ -36,7 +36,7 @@ public class BillController {
     }
 
     @GetMapping("/bill-history/{id}")
-    public ModelAndView showBillHistory(@PathVariable("id") long id) {
+    public ModelAndView showBillHistory(@PathVariable long id) {
         ModelAndView modelAndView = new ModelAndView("user-cart");
         Iterable<Bill> bills = billService.findBillByUserId(id);
         if (!bills.iterator().hasNext()) {

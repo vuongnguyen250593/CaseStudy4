@@ -16,4 +16,9 @@ public class Bill_detailService implements IBill_detailService {
     public void save(BillDetail billDetail) {
         bill_detailRepository.save(billDetail);
     }
+
+    @Override
+    public Iterable<BillDetail> findBillDetailByBillId(long id) {
+        return bill_detailRepository.findAllByBillId(id);
+    }
 }
