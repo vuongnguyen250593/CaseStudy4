@@ -11,12 +11,13 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/user/api")
 public class WA_LikeController {
 
     @Autowired
     private ILikeService likeService;
 
-    @GetMapping("/api/like/{id}")
+    @GetMapping("/like/{id}")
     public ResponseEntity<Iterable<Like>> getLikeByUserId(@PathVariable long id) {
         Iterable<Like> likes = likeService.findLikeByUser(id);
         if (!likes.iterator().hasNext()) {
@@ -25,13 +26,13 @@ public class WA_LikeController {
         return new ResponseEntity<>(likes, HttpStatus.OK);
     }
 
-    @PostMapping("/api/like")
+    @PostMapping("/like")
     public ResponseEntity<Like> createLike(@RequestBody Like like) {
         Like likeCreate = likeService.save(like);
         return new ResponseEntity<>(likeCreate, HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/like/{id}")
+    @DeleteMapping("/like/{id}")
     public ResponseEntity<Optional<Like>> deleteLike(@PathVariable("id") long id) {
         Optional<Like> like = likeService.findById(id);
         if (!like.isPresent()) {

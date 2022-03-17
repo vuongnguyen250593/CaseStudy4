@@ -1,5 +1,6 @@
 package com.example.casestudy4_springboot.controller.web_api;
 
+import com.example.casestudy4_springboot.model.Bill;
 import com.example.casestudy4_springboot.model.Cart;
 import com.example.casestudy4_springboot.model.CartDetail;
 import com.example.casestudy4_springboot.model.Product;
@@ -17,13 +18,13 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@SessionAttributes("cart")
+@RequestMapping("/user/api")
 public class WA_CartDetailController {
 
-//    @Autowired
-//    private IBillService billService;
+    @Autowired
+    private IBillService billService;
 
-    @PostMapping("/api/cart")
+    @PostMapping("/cart")
     public int addToCart(@RequestBody CartDetail cartDetail, HttpSession session) {
         Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
         if (cart == null) {
@@ -40,7 +41,8 @@ public class WA_CartDetailController {
         return CartDetail.countCart(cart);
     }
 
-    @PutMapping("/api/cart")
+
+    @PutMapping("/cart")
     public ResponseEntity<Map<String, String>> updateCart(@RequestBody CartDetail cartDetail, HttpSession session) {
         Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
         if (cart == null) {
@@ -55,7 +57,7 @@ public class WA_CartDetailController {
         return new ResponseEntity<>(CartDetail.cartStats(cart), HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/cart/{id}")
+    @DeleteMapping("/cart/{id}")
     public ResponseEntity<Map<String, String>> deleteCartItem(@PathVariable long id, HttpSession session) {
         Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
         if (cart != null && cart.containsKey(id)) {
@@ -65,17 +67,25 @@ public class WA_CartDetailController {
         return new ResponseEntity<>(CartDetail.cartStats(cart), HttpStatus.OK);
     }
 
-    @GetMapping("/api/cart")
+    @GetMapping("/cart/totalPrice")
+    public ResponseEntity<Map<String, String>> totalPrice(HttpSession session) {
+        Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
+        return new ResponseEntity<>(CartDetail.cartStats(cart), HttpStatus.OK);
+    }
+
+//    count product
+    @GetMapping("/cart")
     public int count(HttpSession session) {
         Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
         return CartDetail.countCart(cart);
     }
 
-//    @PostMapping("/api/pay")
-//    public HttpStatus pay(HttpSession session) {
-//        if (billService.addBill((Map<Long, CartDetail>) session.getAttribute("cart"))) {
-//            return HttpStatus.OK;
-//        }
-//        return HttpStatus.BAD_REQUEST;
-//    }
+    @PostMapping("/pay")
+    public HttpStatus pay(@RequestBody Bill bill, HttpSession session) {
+        if (billService.addBill((Map<Long, CartDetail>) session.getAttribute("cart"),bill)) {
+            session.removeAttribute("cart");
+            return HttpStatus.OK;
+        }
+        return HttpStatus.BAD_REQUEST;
+    }
 }

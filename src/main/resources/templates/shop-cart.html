@@ -17,6 +17,7 @@
     <link rel="stylesheet" th:href="@{/css/core-style.css}">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script th:src="@{/ajax/shop-detail.js}"></script>
+    <script th:src="@{/ajax/bill.js}"></script>
 </head>
 
 <body>
@@ -142,7 +143,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <form action="">
+                    <form>
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
@@ -150,15 +151,23 @@
                                 <li><span>Giảm giá:</span> <span id="amount-cart2" th:text="${cartStats.amount} * 0.01"></span></li>
                                 <li><span>Tiền phải thanh toán:</span> <span id="amount-cart3" th:text="${cartStats.amount} * 0.99"></span></li>
                             </ul>
-                            <h5>Hình thức thanh toán</h5>
-                            <div class="summary-table">
-                                <input type="radio" id="html" name="fav_language" value="HTML">
-                                <label for="html">Thanh toán khi nhận hàng</label><br>
-                                <input type="radio" id="css" name="fav_language" value="CSS">
-                                <label for="css">Thanh toán bằng MasterCard</label><br>
+                            <div>
+                                <select id="status" th:value="1">
+                                    <option selected value="1">Thanh toán khi nhận hàng</option>
+                                    <option value="2">Thanh toán bằng Card</option>
+                                </select>
+                            </div>
+                            <hr>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="note" placeholder="Note">
                             </div>
                             <div class="cart-btn mt-100">
-                                <a href="shop-checkout.html" class="btn amado-btn w-100">Checkout</a>
+                                <button type="button" class="btn amado-btn w-100" data-bs-dismiss="modal"
+                                        th:attr="onclick=|createBill()|">Checkout
+                                </button>
                             </div>
                         </div>
                     </form>

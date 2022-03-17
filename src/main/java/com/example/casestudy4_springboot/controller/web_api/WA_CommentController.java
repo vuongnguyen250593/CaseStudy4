@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/user/api")
 public class WA_CommentController {
 
     @Autowired
     private ICommentService commentService;
 
-    @GetMapping("/api/comment/{id}")
+    @GetMapping("/comment/{id}")
     public ResponseEntity<Iterable<Comment>> findByProduct(@SortDefault(sort = "id", direction = Sort.Direction.DESC)
-                                                           @PathVariable long id) {
+                                                               @PathVariable long id) {
         Iterable<Comment> comments = commentService.findCommentsByProduct(id);
         if (!comments.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -26,7 +27,7 @@ public class WA_CommentController {
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 
-    @PostMapping("/api/add-comment")
+    @PostMapping("/add-comment")
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
         Comment commentCreate = commentService.save(comment);
         return new ResponseEntity<>(commentCreate, HttpStatus.OK);

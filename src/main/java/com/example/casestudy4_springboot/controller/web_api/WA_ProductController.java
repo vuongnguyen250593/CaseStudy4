@@ -1,6 +1,8 @@
 package com.example.casestudy4_springboot.controller.web_api;
 
+import com.example.casestudy4_springboot.model.Bill;
 import com.example.casestudy4_springboot.model.Product;
+import com.example.casestudy4_springboot.service.IBillService;
 import com.example.casestudy4_springboot.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,18 @@ public class WA_ProductController {
 
     @Autowired
     private IProductService productService;
+
+    @Autowired
+    private IBillService billService;
+
+    @GetMapping("/bill/{id}")
+    public ResponseEntity<Iterable<Bill>> showBill(@PathVariable("id") long id) {
+        Iterable<Bill> bills = billService.findBillByUserId(id);
+        if (!bills.iterator().hasNext()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(bills, HttpStatus.OK);
+    }
 
     @GetMapping
     public ResponseEntity<Iterable<Product>> showAll() {

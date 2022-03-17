@@ -1,3 +1,4 @@
+
 function displayComment(comment) {
     return `<div>
                 <p class="form-control">
@@ -10,7 +11,7 @@ function displayComment(comment) {
 function getListComment(id) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/api/comment/${id}`,
+        url: `http://localhost:8080/user/api/comment/${id}`,
         success: function (data) {
             let content = "";
             for (let i = 0; i < data.length; i++) {
@@ -21,3 +22,4 @@ function getListComment(id) {
         }
     });
 }
+

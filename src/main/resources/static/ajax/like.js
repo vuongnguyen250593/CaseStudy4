@@ -1,5 +1,8 @@
-function createLike(productId) {
+
+
+function createLike(id) {
     let userId = 2;
+    let productId = id;
     let newLike = {
         user: {
             id: userId
@@ -18,32 +21,10 @@ function createLike(productId) {
         },
         type: "POST",
         data: JSON.stringify(newLike),
-        url: `http://localhost:8080/api/like`,
-    });
-    event.preventDefault();
-}
+        url: `http://localhost:8080/user/api/like`,
+        success: function () {
 
-function editLike(productId) {
-    let userId = 2;
-    let newLike = {
-        user: {
-            id: userId
-        },
-        product: {
-            id: productId
-        },
-        statusLike: {
-            s_id: 2
         }
-    };
-    $.ajax({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        type: "PUT",
-        data: JSON.stringify(newLike),
-        url: `http://localhost:8080/api/like`,
     });
     event.preventDefault();
 }
@@ -51,7 +32,7 @@ function editLike(productId) {
 function deleteLike(id) {
     $.ajax({
         type: "DELETE",
-        url: `http://localhost:8080/api/like/${id}`,
+        url: `http://localhost:8080/user/api/like/${id}`,
         success: function () {
             let row = document.getElementById(`like${id}`)
             row.style.display = "none";

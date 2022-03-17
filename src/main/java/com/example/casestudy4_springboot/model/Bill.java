@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -20,14 +21,10 @@ public class Bill {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @DateTimeFormat(pattern = "MM/dd/YYYY")
-    @Column(columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
-    private Date date;
+    private LocalDate date;
 
-    @Size(max = 100, message = "The text is max 100 characters")
     private String note;
 
-    @NotNull
     @ManyToOne
     private StatusBill statusBill;
 
@@ -36,7 +33,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Long id, User user, Date date, String note, StatusBill statusBill, double total) {
+    public Bill(Long id, User user, LocalDate date, String note, StatusBill statusBill, double total) {
         this.id = id;
         this.user = user;
         this.date = date;
@@ -61,11 +58,11 @@ public class Bill {
         this.user = user;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

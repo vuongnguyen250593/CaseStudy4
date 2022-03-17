@@ -3,6 +3,7 @@ package com.example.casestudy4_springboot.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -33,6 +34,8 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @OneToMany(mappedBy = "user")
+    private List<Like> likes;
 
     public User() {
     }
