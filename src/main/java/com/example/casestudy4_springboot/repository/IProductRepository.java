@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface IProductRepository extends PagingAndSortingRepository<Product, Long> {
+public interface IProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findAllByNameContaining (Pageable pageable, String name);
 
     Page<Product> findAllByCategory (Pageable pageable, Category category);
