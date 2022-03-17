@@ -55,6 +55,7 @@ public class ProductController {
         return modelAndView;
     }
 
+
     @GetMapping("/delete/{id}")
     public ModelAndView delete(@PageableDefault(value = 10) Pageable pageable, @PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("admin-product-manager");
@@ -125,5 +126,23 @@ public class ProductController {
             iProductService.save(product);
         }
         return "redirect:/admin";
+    }
+
+    @GetMapping("/desc")
+    public ModelAndView sortByDesc(@SortDefault(sort = "price", direction = Sort.Direction.DESC)
+                                   @PageableDefault(value = 10) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("admin-product-manager");
+        Page<Product> products = iProductService.findAll(pageable);
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
+
+    @GetMapping("/asc")
+    public ModelAndView sortByAsc(@SortDefault(sort = "price", direction = Sort.Direction.ASC)
+                                  @PageableDefault(value = 10) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("admin-product-manager");
+        Page<Product> products = iProductService.findAll(pageable);
+        modelAndView.addObject("products", products);
+        return modelAndView;
     }
 }
