@@ -145,4 +145,16 @@ public class ProductController {
         modelAndView.addObject("products", products);
         return modelAndView;
     }
+
+    @GetMapping("/shop-detail/{id}")
+    public ModelAndView showDetail(@PathVariable("id") long id) {
+        ModelAndView modelAndView = new ModelAndView("shop-detail");
+        Optional<Product> product = iProductService.findById(id);
+        if (product.isPresent()) {
+            modelAndView.addObject("product", product.get());
+        } else {
+            modelAndView.addObject("message", "Không có sản phẩm");
+        }
+        return modelAndView;
+    }
 }

@@ -13,7 +13,7 @@ public class Like {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user_id;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -26,9 +26,9 @@ public class Like {
     public Like() {
     }
 
-    public Like(Long id, User user_id, Product product, StatusLike statusLike) {
+    public Like(Long id, User user, Product product, StatusLike statusLike) {
         this.id = id;
-        this.user_id = user_id;
+        this.user = user;
         this.product = product;
         this.statusLike = statusLike;
     }
@@ -41,12 +41,12 @@ public class Like {
         this.id = id;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Product getProduct() {

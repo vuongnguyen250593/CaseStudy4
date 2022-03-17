@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface IProductRepository extends PagingAndSortingRepository<Product, Long> {
+public interface IProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findAllByNameContaining (Pageable pageable, String name);
 
     Page<Product> findProductsByCategory_Id (Long id, Pageable pageable);

@@ -18,7 +18,7 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" th:href="@{/css/core-style.css}">
-    <!--    <link rel="stylesheet" th:href="@{/style.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/style.css}">-->
 
 </head>
 
@@ -69,7 +69,7 @@
         <!-- Button Group -->
         <div class="amado-btn-group mt-30 mb-100">
             <a href="signin-admin.html" class="btn amado-btn mb-15">Sign In</a>
-            <a href="#" class="btn amado-btn active">Contact</a>
+            <a href="#" class="btn amado-btn active"  th:href="@{/mail}" >Contact</a>
         </div>
         <!-- Cart Menu -->
         <div class="cart-fav-search mb-100">
@@ -102,8 +102,8 @@
             </div>
         </div>
         <hr>
-        <!-- ##### Single Widget ##### -->
-        <form action="">
+         <!-- ##### Single Widget ##### -->
+         <form action="">
             <div class="widget price mb-50">
                 <!-- Widget Title -->
                 Search theo giá
@@ -190,6 +190,17 @@
                         <a th:href="@{/shop/showDisplay(page=${product2s.number + 1},search=${search})}"
                            th:if="${product2s.hasNext()}"><span>Next</span></a>
                     </div>
+
+<!--                    đoạn này là phân trang mặc định của template nhưng chưa xử lý được, dùng cái phân trang theo bài a quân-->
+                    <!-- Pagination -->
+<!--                    <nav aria-label="navigation">-->
+<!--                        <ul class="pagination justify-content-end mt-50">-->
+<!--                            <li class="page-item active"><a class="page-link" href="#">01.</a></li>-->
+<!--                            <li class="page-item"><a class="page-link" href="#">02.</a></li>-->
+<!--                            <li class="page-item"><a class="page-link" href="#">03.</a></li>-->
+<!--                            <li class="page-item"><a class="page-link" href="#">04.</a></li>-->
+<!--                        </ul>-->
+<!--                    </nav>-->
                 </div>
             </div>
         </div>

@@ -22,6 +22,10 @@ public class CategoryController {
         modelAndView.addObject("categories", categories);
         return  modelAndView;
     }
+<<<<<<< HEAD
 
 
 }
+=======
+}
+>>>>>>> 80927bcf843bccbb9bfb71d4f4a90071a244ebbe
