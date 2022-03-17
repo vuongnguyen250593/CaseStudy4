@@ -30,7 +30,7 @@ public class UserController {
 
     @GetMapping
     public ModelAndView showUser(Pageable pageable, @RequestParam Optional<String> search) {
-         ModelAndView modelAndView = new ModelAndView("index");
+         ModelAndView modelAndView = new ModelAndView("user-manager");
          Page<User> users;
          if (search.isPresent()) {
              users = iUserService.findAllByEmail(search.get(), pageable);
@@ -44,7 +44,7 @@ public class UserController {
 
     @GetMapping("/delete/{id}")
     public ModelAndView delete(Pageable pageable, @PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("user-manager");
         iUserService.deleteById(id);
         Page<User> users = iUserService.findAll(pageable);
         modelAndView.addObject("users", users);
@@ -53,7 +53,7 @@ public class UserController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("user-create");
         modelAndView.addObject("users", new User());
         return modelAndView;
     }
@@ -71,7 +71,7 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("edit-user");
+        ModelAndView modelAndView = new ModelAndView("user-edit");
         Optional<User> user = iUserService.findOne(id);
         if (user.isPresent()){
             modelAndView.addObject("user", user);
