@@ -10,14 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("user")
 public class UserController {
 
     @Autowired
@@ -30,7 +28,7 @@ public class UserController {
 
     @GetMapping
     public ModelAndView showUser(Pageable pageable, @RequestParam Optional<String> search) {
-         ModelAndView modelAndView = new ModelAndView("user-manager");
+         ModelAndView modelAndView = new ModelAndView("user/user-manager");
          Page<User> users;
          if (search.isPresent()) {
              users = iUserService.findAllByEmail(search.get(), pageable);
@@ -44,7 +42,7 @@ public class UserController {
 
     @GetMapping("/delete/{id}")
     public ModelAndView delete(Pageable pageable, @PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("user-manager");
+        ModelAndView modelAndView = new ModelAndView("user/user-manager");
         iUserService.deleteById(id);
         Page<User> users = iUserService.findAll(pageable);
         modelAndView.addObject("users", users);
@@ -53,7 +51,7 @@ public class UserController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        ModelAndView modelAndView = new ModelAndView("user-create");
+        ModelAndView modelAndView = new ModelAndView("user/user-create");
         modelAndView.addObject("users", new User());
         return modelAndView;
     }
@@ -71,7 +69,7 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("user-edit");
+        ModelAndView modelAndView = new ModelAndView("user/user-edit");
         Optional<User> user = iUserService.findOne(id);
         if (user.isPresent()){
             modelAndView.addObject("user", user);
