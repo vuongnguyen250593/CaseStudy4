@@ -19,4 +19,8 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     void deleteAllByCategory (Category category);
 
     Product findProductById(long id);
+
+    Page<Product> findProductsByCategory_Id (Long id, Pageable pageable);
+
+    Page<Product> findAllByPriceBetween(double min, double max, Pageable pageable);
 }

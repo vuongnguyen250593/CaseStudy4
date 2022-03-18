@@ -1,7 +1,7 @@
 
 
 function createLike(id) {
-    let userId = 2;
+    let userId = $('#hehe').val();
     let productId = id;
     let newLike = {
         user: {
@@ -39,3 +39,9 @@ function deleteLike(id) {
         }
     });
 }
+
+function favourite() {
+    let userId = $('#hehe').val();
+    window.location.replace(`http://localhost:8080/user/favourite/${userId}`)
+}
+

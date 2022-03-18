@@ -2,6 +2,7 @@ package com.example.casestudy4_springboot.controller;
 
 import com.example.casestudy4_springboot.model.Bill;
 import com.example.casestudy4_springboot.model.CartDetail;
+import com.example.casestudy4_springboot.model.User;
 import com.example.casestudy4_springboot.repository.IBillRepository;
 import com.example.casestudy4_springboot.service.IBillService;
 import com.example.casestudy4_springboot.service.IProductService;
@@ -13,11 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
 public class BillController {
-
 
     @Autowired
     private IBillService billService;
@@ -31,6 +32,8 @@ public class BillController {
         } else {
             modelAndView.addObject("carts", cart.values());
         }
+        Optional<User> user = (Optional<User>) session.getAttribute("userInformation");
+        modelAndView.addObject("userInformation", user.get());
         modelAndView.addObject("cartStats", CartDetail.cartStats(cart));
         return modelAndView;
     }

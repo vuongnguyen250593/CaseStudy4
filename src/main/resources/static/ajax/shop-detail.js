@@ -92,7 +92,7 @@ function deleteCart(id) {
 
 
 function createBill() {
-    let userId = 2;
+    let userId = $('#hehe').val();
     let date = new Date();
     let note = $('#note').val();
     let statusBill = 1;
@@ -174,10 +174,11 @@ function displayFormComment(id) {
 }
 
 function createComment(productId) {
+    let userId = $('#hehe').val();
     let comment = $('#company').val();
     let newComment = {
         user_id: {
-            id: 2,
+            id: userId,
         },
         comment: comment,
         product: {
@@ -199,3 +200,4 @@ function createComment(productId) {
     });
     event.preventDefault();
 }
+

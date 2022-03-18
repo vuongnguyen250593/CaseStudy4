@@ -12,11 +12,11 @@ public class CategoryController {
     @Autowired
     private ICategoryService iCategoryService;
 
-    @GetMapping
-    public ModelAndView showCategory() {
-        ModelAndView modelAndView = new ModelAndView("admin-product-manager");
-        Iterable<Category> categories = iCategoryService.findAll();
-        modelAndView.addObject("categories", categories);
-        return modelAndView;
-    }
+//    @GetMapping
+//    public ModelAndView showCategory() {
+//        ModelAndView modelAndView = new ModelAndView("admin-product-manager");
+//        Iterable<Category> categories = iCategoryService.findAll();
+//        modelAndView.addObject("categories", categories);
+//        return modelAndView;
+//    }
 }

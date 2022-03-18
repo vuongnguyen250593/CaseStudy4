@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -18,6 +19,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script th:src="@{/ajax/shop-detail.js}"></script>
     <script th:src="@{/ajax/bill.js}"></script>
+    <script th:src="@{/ajax/user.js}"></script>
 </head>
 
 <body>
@@ -96,8 +98,8 @@
                 <div class="col-12 col-lg-8">
                     <div class="cart-title mt-50">
                         <h2>Shopping Cart</h2>
+                        <input type="text" id="hehe" value="" hidden>
                     </div>
-
                     <div class="cart-table clearfix">
                         <table class="table table-responsive">
                             <thead>
