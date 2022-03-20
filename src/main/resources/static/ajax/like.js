@@ -124,4 +124,9 @@ function favourite() {
     window.location.replace(`http://localhost:8080/user/favourite/${userId}`)
 }
 
+function receipt() {
+    let userId = $('#hehe').val();
+    window.location.replace(`http://localhost:8080/user/bill-history/${userId}`)
+}
+
 

@@ -35,7 +35,7 @@ public class ShopController {
         return iCategoryService.findAll();
     }
 
-    @GetMapping("/shop-detail/{id}")
+    @GetMapping("/shop/{id}")
     public ModelAndView showDetail(@PathVariable("id") long id, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("shop-detail");
         Optional<Product> product = iProductService.findById(id);
@@ -49,7 +49,7 @@ public class ShopController {
         return modelAndView;
     }
 
-    @GetMapping("/shop")
+    @GetMapping
     public ModelAndView showProduct(@PageableDefault(value = 4) Pageable pageable, @RequestParam Optional<String> search) {
         ModelAndView modelAndView = new ModelAndView("shop");
         Page<Product> products;

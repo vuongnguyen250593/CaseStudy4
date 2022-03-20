@@ -24,7 +24,7 @@ public class BillController {
     @Autowired
     private IBillService billService;
 
-    @GetMapping
+    @GetMapping("/bill")
     public ModelAndView showBill(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("shop-cart");
         Map<Long, CartDetail> cart = (Map<Long, CartDetail>) session.getAttribute("cart");
