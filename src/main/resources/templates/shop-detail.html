@@ -21,11 +21,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script th:src="@{/ajax/shop-detail.js}"></script>
     <script th:src="@{/ajax/comment.js}"></script>
-    <script th:src="@{/ajax/like.js}"></script>
+
     <script th:src="@{/ajax/user.js}"></script>
 </head>
 
-<body>
+<body th:attr="onload=|createLikeDefault(${product.id})|">
+<input type="text" id="hehe" value="">
 <!-- Search Wrapper Area Start -->
 <div class="search-wrapper section-padding-100">
     <div class="search-close">
@@ -62,10 +63,11 @@
         <!-- Amado Nav -->
         <nav class="amado-nav">
             <ul>
+                <li id="name-user"></li>
                 <li><a href="shop-home.html">Home</a></li>
                 <li class="active"><a href="shop.html">Shop</a></li>
                 <li><a href="user-edit-account.html">Account</a></li>
-                <li><a href="user-cart.html">Cart History</a></li>
+                <li><a th:attr="onclick=|receipt()|">Receipt</a></li>
             </ul>
         </nav>
         <!-- Button Group -->
@@ -77,7 +79,8 @@
         <div class="cart-fav-search mb-100">
             <a th:href="@{/user}" class="cart-nav"><img th:src="@{/img/core-img/cart.png}" alt=""> Cart (<span
                     id="cart-counter">0</span>)</a>
-            <a th:attr="onclick=|favourite()|" class="fav-nav"><img th:src="@{/img/core-img/favorites.png}" alt=""> Favourite</a>
+            <a th:attr="onclick=|favourite()|" class="fav-nav"><img th:src="@{/img/core-img/favorites.png}" alt="">
+                Favourite</a>
             <a href="#" class="search-nav"><img th:src="@{/img/core-img/search.png}" alt=""> Search</a>
         </div>
         <!-- Social Button -->
@@ -98,7 +101,7 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mt-50">
-                            <input type="text" id="hehe" value="" hidden>
+
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Furniture</a></li>
                             <li class="breadcrumb-item"><a href="#">Chairs</a></li>
@@ -139,12 +142,7 @@
                             </a>
                             <!-- Ratings & Review -->
                             <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
-                                <div class="cart">
-                                    <a href="user-favourite.html" data-toggle="tooltip" data-placement="left"
-                                       title="Follow Product" th:attr="onclick=|createLike(${product.id})|">
-                                        <img th:src="@{/img/core-img/tim.png}" alt="" >
-                                    </a>
-                                </div>
+                                <div id="my-like"></div>
                                 <div class="cart">
                                     <a href="#comment" data-toggle="tooltip" data-placement="left" title="Comment"><img
                                             th:src="@{/img/core-img/cmt.png}" alt=""
@@ -184,8 +182,10 @@
                                 <div class="col-12 mb-3" style="display: flex">
                                     <input type="text" class="form-control" id="company" placeholder="Content"
                                            size="50" style="margin-right: 10px">
-                                    <button type="submit" class="btn amado-btn" id="btn-comment" data-bs-dismiss="modal">
-                                        Bình luận</button>
+                                    <button type="submit" class="btn amado-btn" id="btn-comment"
+                                            data-bs-dismiss="modal">
+                                        Bình luận
+                                    </button>
                                 </div>
                             </form>
 
@@ -302,7 +302,7 @@
 <script th:src="@{/js/plugins.js}"></script>
 <!-- Active js -->
 <script th:src="@{/js/active.js}"></script>
-
+<script th:src="@{/ajax/like.js}"></script>
 </body>
 
 </html>

@@ -17,6 +17,16 @@ public class WA_LikeController {
     @Autowired
     private ILikeService likeService;
 
+    @GetMapping("/like-product/{idP}/{idU}")
+    public ResponseEntity<Optional<Like>> getLikeByProductAndUser(@PathVariable("idP") long idP,
+                                                                  @PathVariable("idU") long idU) {
+        Optional<Like> like = likeService.findLikeByProductAndUser(idP, idU);
+        if (!like.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(like, HttpStatus.OK);
+    }
+
     @GetMapping("/like/{id}")
     public ResponseEntity<Iterable<Like>> getLikeByUserId(@PathVariable long id) {
         Iterable<Like> likes = likeService.findLikeByUser(id);
@@ -26,19 +36,39 @@ public class WA_LikeController {
         return new ResponseEntity<>(likes, HttpStatus.OK);
     }
 
-    @PostMapping("/like")
-    public ResponseEntity<Like> createLike(@RequestBody Like like) {
-        Like likeCreate = likeService.save(like);
-        return new ResponseEntity<>(likeCreate, HttpStatus.OK);
+    @PostMapping("/like/{idP}/{idU}")
+    public ResponseEntity<?> createLike(@RequestBody Like like,
+                                           @PathVariable("idP") long idP,
+                                           @PathVariable("idU") long idU) {
+        Optional<Like> likeFind = likeService.findLikeByProductAndUser(idP, idU);
+        if (likeFind.isPresent()) {
+            return new ResponseEntity<>(likeFind,HttpStatus.OK);
+        }
+        Like likePost = likeService.save(like);
+        return new ResponseEntity<>(likePost, HttpStatus.OK);
     }
 
-    @DeleteMapping("/like/{id}")
-    public ResponseEntity<Optional<Like>> deleteLike(@PathVariable("id") long id) {
-        Optional<Like> like = likeService.findById(id);
+    @PutMapping("/like/{idP}/{idU}")
+    public ResponseEntity<Like> editLike(@RequestBody Like like,
+                                           @PathVariable("idP") long idP,
+                                           @PathVariable("idU") long idU) {
+        Optional<Like> likeFind = likeService.findLikeByProductAndUser(idP, idU);
+        if (!likeFind.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        like.setId(likeFind.get().getId());
+        Like likePost = likeService.save(like);
+        return new ResponseEntity<>(likePost, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/like/{idP}/{idU}")
+    public ResponseEntity<Optional<Like>> deleteLike(@PathVariable("idP") long idP,
+                                                     @PathVariable("idU") long idU) {
+        Optional<Like> like = likeService.findLikeByProductAndUser(idP, idU);
         if (!like.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        likeService.deleteById(id);
+        likeService.deleteById(like.get().getId());
         return new ResponseEntity<>(like, HttpStatus.OK);
     }
 }

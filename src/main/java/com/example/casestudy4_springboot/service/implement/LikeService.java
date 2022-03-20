@@ -38,4 +38,19 @@ public class LikeService implements ILikeService {
     public Iterable<Like> findLikeByUser(long id) {
         return likeRepository.findLikesByUser_Id(id);
     }
+
+    @Override
+    public Optional<Like> findLikeByProductAndUser(long product, long user) {
+        return likeRepository.findLikeByProductAndUser(product, user);
+    }
+
+    @Override
+    public Like save1ByProductAndUser(long product, long user) {
+        return likeRepository.save1ByProductAndUser(product, user);
+    }
+
+    @Override
+    public Like save2ByProductAndUser(long product, long user) {
+        return likeRepository.save2ByProductAndUser(product, user);
+    }
 }

@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
+@SessionAttributes("cart")
 public class BillController {
 
     @Autowired

@@ -10,14 +10,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements UserDetailsService, IUserService {
+public class UserService implements UserDetailsService {
     @Autowired
     private IUserRepository iUserRepository;
 
@@ -27,15 +24,5 @@ public class UserService implements UserDetailsService, IUserService {
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(user.getRole());
         return new User(user.getEmail(), user.getPassword(), roles);
-    }
-
-    @Override
-    public com.example.casestudy4_springboot.model.User getUserByName(String name) {
-        return iUserRepository.findUserByName(name);
-    }
-
-    @Override
-    public Optional<com.example.casestudy4_springboot.model.User> getUserByEmail(String email) {
-        return iUserRepository.findUserByEmail(email);
     }
 }
