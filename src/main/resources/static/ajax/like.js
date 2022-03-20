@@ -109,14 +109,12 @@ function editLike(id) {
 }
 
 function deleteLike(id) {
-    let userId = $('#hehe').val();
     $.ajax({
         type: "DELETE",
-        url: `http://localhost:8080/user/api/like/${id}/${userId}`,
+        url: `http://localhost:8080/user/api/like/${id}`,
         success: function () {
-            checkLike(id);
-            // let row = document.getElementById(`like${id}`)
-            // row.style.display = "none";
+            let row = document.getElementById(`like${id}`)
+            row.style.display = "none";
         }
     });
 }

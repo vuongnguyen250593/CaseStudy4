@@ -12,4 +12,6 @@ public interface ILikeService extends IGeneralService<Like> {
     Like save1ByProductAndUser(long product, long user);
 
     Like save2ByProductAndUser(long product, long user);
+
+    long countLikeByProduct(long id);
 }

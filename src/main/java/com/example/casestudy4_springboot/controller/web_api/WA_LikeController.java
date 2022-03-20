@@ -27,6 +27,12 @@ public class WA_LikeController {
         return new ResponseEntity<>(like, HttpStatus.OK);
     }
 
+    @GetMapping("/count-like/{id}")
+    public ResponseEntity<?> countLikeByProduct(@PathVariable long id) {
+        long count = likeService.countLikeByProduct(id);
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
     @GetMapping("/like/{id}")
     public ResponseEntity<Iterable<Like>> getLikeByUserId(@PathVariable long id) {
         Iterable<Like> likes = likeService.findLikeByUser(id);
@@ -61,14 +67,13 @@ public class WA_LikeController {
         return new ResponseEntity<>(likePost, HttpStatus.OK);
     }
 
-    @DeleteMapping("/like/{idP}/{idU}")
-    public ResponseEntity<Optional<Like>> deleteLike(@PathVariable("idP") long idP,
-                                                     @PathVariable("idU") long idU) {
-        Optional<Like> like = likeService.findLikeByProductAndUser(idP, idU);
+    @DeleteMapping("/like/{id}")
+    public ResponseEntity<Optional<Like>> deleteLike(@PathVariable long id) {
+        Optional<Like> like = likeService.findById(id);
         if (!like.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        likeService.deleteById(like.get().getId());
+        likeService.deleteById(id);
         return new ResponseEntity<>(like, HttpStatus.OK);
     }
 }

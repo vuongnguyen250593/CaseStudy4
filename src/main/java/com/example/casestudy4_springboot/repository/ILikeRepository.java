@@ -20,6 +20,9 @@ public interface ILikeRepository extends JpaRepository<Like, Long> {
     @Query("SELECT l FROM Like  l WHERE l.product.id = :idProduct AND l.user.id = :idUser")
     Optional<Like> findLikeByProductAndUser(long idProduct, long idUser);
 
+    @Query(value = "select status_like_s_id, count(*) from liked where status_like_s_id = 1 and product_id = :id", nativeQuery = true)
+    long countLikeByProduct(long id);
+
     @Modifying
     @Transactional
     @Query("UPDATE Like l SET l.statusLike.s_id = 1 WHERE l.product.id = :idProduct AND l.user.id = :idUser")

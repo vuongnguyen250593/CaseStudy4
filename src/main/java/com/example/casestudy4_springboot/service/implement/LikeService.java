@@ -53,4 +53,9 @@ public class LikeService implements ILikeService {
     public Like save2ByProductAndUser(long product, long user) {
         return likeRepository.save2ByProductAndUser(product, user);
     }
+
+    @Override
+    public long countLikeByProduct(long id) {
+        return likeRepository.countLikeByProduct(id);
+    }
 }
